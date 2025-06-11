@@ -24,9 +24,7 @@
   (lambda (x)
     (disj
      (== x 5)      
-     (lambda (a/c)
-       (lambda ()
-         ((fives x) a/c))))))
+     (Zzz (fives x)))))
 
 (define appendo
   (lambda (l s out)
@@ -42,9 +40,7 @@
              (lambda (res)
                (conj
                 (== `(,a . ,res) out)
-                (lambda (s/c)
-                  (lambda ()
-                    ((appendo d s res) s/c))))))))))))))
+                (Zzz (appendo d s res)))))))))))))
 
 (define appendo2
   (lambda (l s out)
@@ -59,9 +55,7 @@
             (call/fresh
              (lambda (res)
                (conj
-                (lambda (s/c)
-                  (lambda ()
-                    ((appendo2 d s res) s/c)))
+                (Zzz (appendo2 d s res))
                 (== `(,a . ,res) out))))))))))))
 
 (define call-appendo
@@ -117,8 +111,7 @@
            (== x `(,x1 . ,x2))
            (disj
             (== x1 x2)
-            (lambda (s/c)
-              (lambda () ((relo x) s/c)))))))))))
+            (Zzz (relo x))))))))))
 
 (define many-non-ans
   (call/fresh
