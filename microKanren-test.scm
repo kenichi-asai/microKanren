@@ -48,11 +48,11 @@
     (((#(1) . 6) (#(0) . 7)) . 2)))
 
 (test-check "ground appendo"
-  (car ((ground-appendo empty-state)))
+  (car (force-thunk (ground-appendo empty-state)))
   '(((#(2) b) (#(1)) (#(0) . a)) . 3))
 
 (test-check "ground appendo2"
-  (car ((ground-appendo2 empty-state)))
+  (car (force-thunk (ground-appendo2 empty-state)))
   '(((#(2) b) (#(1)) (#(0) . a)) . 3))
 
 (test-check "appendo"

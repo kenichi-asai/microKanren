@@ -3,7 +3,7 @@
 
 (define-syntax Zzz
   (syntax-rules ()
-    ((_ g) (lambda (s/c) (lambda () (g s/c))))))
+    ((_ g) (lambda (s/c) (make-thunk g s/c)))))
 
 (define-syntax conj+
   (syntax-rules ()
@@ -42,7 +42,7 @@
 (define (call/goal g) (g empty-state))
 
 (define (pull $)
-  (if (procedure? $) (pull ($)) $))
+  (if (thunk? $) (pull (force-thunk $)) $))
 
 (define (take-all $)
   (let (($ (pull $)))
