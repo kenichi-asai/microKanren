@@ -52,7 +52,7 @@
         ((eq? tag disj-tag)
          (let (($1 (car (cdr thunk)))
                ($2 (cdr (cdr thunk))))
-           (mplus $1 (force-thunk $2))))
+           (mplus $2 (force-thunk $1))))
         ((eq? tag conj-tag)
          (let (($ (car (cdr thunk)))
                (g (cdr (cdr thunk))))
@@ -70,7 +70,7 @@
 (define (mplus $1 $2)
   (cond
     ((null? $1) $2)
-    ((thunk? $1) (make-disj-thunk $2 $1))
+    ((thunk? $1) (make-disj-thunk $1 $2))
     (else (cons (car $1) (mplus (cdr $1) $2)))))
 
 (define (bind $ g)
