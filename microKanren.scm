@@ -57,7 +57,7 @@
          (let (($ (car (cdr thunk)))
                (g (cdr (cdr thunk))))
            (bind (force-thunk $) g)))))
-    cannot-happen))
+    thunk))
 (define (thunk? $)
   (and (pair? $)
        (or (eq? (car $) thunk-tag)
