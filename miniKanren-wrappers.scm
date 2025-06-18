@@ -3,7 +3,7 @@
 
 (define-syntax Zzz
   (syntax-rules ()
-    ((_ g) (lambda (s/c) (make-thunk g s/c)))))
+    ((_ g) (lambda (s/c) (make-Zzz-thunk g s/c)))))
 
 (define-syntax conj+
   (syntax-rules ()
