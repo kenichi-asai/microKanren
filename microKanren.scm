@@ -29,8 +29,10 @@
 
 (define (run-goal g s/c)
   (cond ((Zzz? g)
-	 (let ((g (cdr g)))
-	   (make-Zzz-thunk (g) s/c)))
+	 (let ((g ((cdr g)))) ; evaluate g now
+	   (if (or (Zzz? g) (==? g) (call/fresh? g))
+	     (run-goal g s/c) ; eagerly evaluate
+	     (make-Zzz-thunk g s/c))))
         ((==? g)
 	 (let ((u (car (cdr g)))
 	       (v (cdr (cdr g))))
