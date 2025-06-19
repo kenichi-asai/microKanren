@@ -3,7 +3,7 @@
 
 (define-syntax Zzz
   (syntax-rules ()
-    ((_ g) (lambda (s/c) (make-Zzz-thunk g s/c)))))
+    ((_ g) (make-Zzz (lambda () g))))) ; do not evaluate g now
 
 (define-syntax conj+
   (syntax-rules ()
@@ -39,7 +39,7 @@
 
 (define empty-state '(() . 0))
 
-(define (call/goal g) (g empty-state))
+(define (call/goal g) (run-goal g empty-state))
 
 (define (pull $)
   (if (thunk? $) (pull (force-thunk $)) $))
